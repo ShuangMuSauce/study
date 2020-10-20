@@ -1,0 +1,87 @@
+#设置用户名称与邮件地址
+git config --global user.name "maxsu"
+git config --global user.email maxsu@yiibai.com
+
+#使用不同的文本编辑器
+#Vim（编辑器）
+git config --global core.editor （编辑器名）
+git config --global core.editor   Vim
+
+#检查配置信息
+git config --list
+#检查 Git 的某一项配置
+git config user.name
+
+#获取帮助
+git help <verb>
+git <verb> --help
+man git-<verb>
+
+#获得 config 命令的手册
+git help config
+
+git init  #初始化仓库
+git add <hello.txt>  # 把所有要提交的文件修改放到暂存区
+git add .  #将所有文件暂存起来
+git commit -m 'add a file' # 把暂存区的所有内容提交到当前分支
+git status   #检查当前文件状态
+git status -s 命令或 git status --short	#状态简览
+
+mkdir <textname>  #创建一个文件
+echo "创建一个文件">home.txt
+git rm <file> #删除文件
+git rm --cached <file> #从暂存区域移除,保留在当前工作目录中
+
+.gitignore #忽略文件
+#GitHub 有一个十分详细的针对数十种项目及编程语言的 .gitignore 文件列表
+https://github.com/github/gitignore
+
+git diff #查看文件修改内容
+git diff --cached #查看已经暂存起来的变化
+
+git commit -a -m 'add a file' #给 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤
+
+
+#重命名文件
+git mv <oldFile> <newFile> 
+相当于：
+          mv README.md home.md
+          git rm README.md
+          git add home.txt
+
+#查看提交历史
+git log   
+git log -p -2    #-p用来显示每次提交的内容差异,-2显示最近两次提交
+git log --stat  #简略的统计信息
+git log --pretty=oneline  #--pretty,指定使用不同于默认格式的方式展示提交历史, 这个选项有一些内建的子选项供你使用,比如用 oneline 将每个提交放在一行显示.
+git log --pretty=format:"%h - %an, %ar : %s"  # 可以定制要显示的记录格式
+git log --pretty=format:"%h %s" --graph     #graph展示你的分支、合并历史
+
+#撤消操作
+git commit --amend
+#提交后发现忘记了暂存某些需要的修改
+git commit -m 'initial commit'
+git add forgotten_file
+git commit --amend
+
+#取消暂存的文件
+#暂存两个文件，取消暂存两个中的一个。
+git reset HEAD <file>
+git checkout --<file>   #撤消对文件的修改
+
+git clone <url>  #克隆远程仓库
+git remote   #查看远程仓库
+git remote -v #显示需要读写的远程仓库和对应的 URL
+git remote add <shortname> <url> #添加远程仓库
+git fetch <shortname> From <url> #拉取仓库中有但你没有的信息
+git fetch [remote-name]  #从远程仓库中抓取与拉取
+git pull #抓取远程提交
+git push [remote-name] [branch-name]  #推送到远程仓库
+              git push origin master
+git remote show [remote-name] #查看远程仓库
+
+#远程仓库的重命名
+git remote rename [旧仓库名称] [新仓库的名称]
+                git remote rename gs newgs   
+git remote rm newgs   #远程仓库的移除
+
