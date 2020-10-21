@@ -38,6 +38,7 @@ https://github.com/github/gitignore
 
 git diff #查看文件修改内容
 git diff --cached #查看已经暂存起来的变化
+git diff HEAD -- <file> #查看工作区和版本库里最新版本的区别
 
 git commit -a -m 'add a file' #给 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤
 
@@ -76,12 +77,70 @@ git remote add <shortname> <url> #添加远程仓库
 git fetch <shortname> From <url> #拉取仓库中有但你没有的信息
 git fetch [remote-name]  #从远程仓库中抓取与拉取
 git pull #抓取远程提交
+git pull origin dev（dev为远程分支名）#将远程分支拉取到本地
 git push [remote-name] [branch-name]  #推送到远程仓库
               git push origin master
 git remote show [remote-name] #查看远程仓库
+git checkout -b branch-name origin/branch-name #在本地创建和远程分支对应的分支
+git branch --set-upstream branch-name origin/branch-name #建立本地分支和远程分支的关联
 
 #远程仓库的重命名
 git remote rename [旧仓库名称] [新仓库的名称]
                 git remote rename gs newgs   
 git remote rm newgs   #远程仓库的移除
 
+
+隐藏
+git stash #隐藏当前工作现场，等恢复后继续工作
+git stash list #查看stash记录
+git stash apply #仅恢复现场，不删除stash内容
+git stash drop #删除stash内容
+git stash pop #恢复现场的同时删除stash内容
+
+移动和重命名
+git mv 文件 目录   #将目录或文件从一个位置移动到另一个位置
+           git mv main.py src/
+git mv 旧文件 新文件 #重新命名文件
+            git mv dome.txt  module.txt
+
+修正错误
+git checkout -- <file> #用版本库的版本替换工作区的版本，无论是工作区的修改还是删除，都可以'一键还原'
+                                  #丢弃工作区的修改（让文件回到最近一次的git commit或git add时的状态）
+git reset HEAD <file> #把暂存区的修改撤销掉，重新放回工作区。
+git reset - mixed #还没有提交的暂存区域还原这些更改。它仅从暂存区域恢复更改。
+git reset --hard 7d8162 #将HEAD指针重置为特定提交ID的最新提交，并删除本地文件更改。
+
+
+标签
+git tag v1.0 #给当前分支最新的commit打标签
+git tag v0.9 36df530 #给历史提交的commit打标签
+git tag -a v0.1 -m 'version 0.1 released' 3628164 #-a指定标签名，-m指定说明文字
+git tag -s <tagname> -m 'blabla' #可以用PGP签名标签
+git tag #查看所有标签
+git show v1.0 #查看标签信息
+git tag -d v0.1 #删除标签
+git push origin <tagname> #推送某个标签到远程
+git push origin --tags #推送所有尚未推送的本地标签
+删除远程标签  git tag -d v0.2 #先删除本地标签
+			 git push origin :refs/tags/v0.2 #删除远程标签
+
+补丁
+git format-patch   #创建最新提交的修补程序。如果要为特定提交创建修补程序，请在format-patch命令后面指定 COMMIT_ID。
+git am     #会修改文件并创建提交
+git apply #修改本地文件而不创建提交
+
+分支
+git checkout -b dev #创建并切换分支
+	#相当于git branch dev 和git checkout dev
+git branch <branch name>   #创建一个新的分支
+git branch #查看当前分支，当前分支前有个*号
+git checkout <name> #切换分支
+git branch -d <name> #删除分支
+git branch -m 旧分支 新分支   #重命名
+git merge <name> #合并某个分支到当前分支
+git log --graph #查看分支合并图
+git merge --no-ff -m 'message' dev #禁用Fast forward合并dev分支
+	#本次合并要创建新的commit，所以要加上-m参数，把commit描述写进去
+	#Fast forward合并不可查看合并记录
+git branch -D <name> #强行删除某个未合并的分支
+	#开发新feature最好新建一个分支
