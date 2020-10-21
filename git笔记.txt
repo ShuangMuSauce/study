@@ -107,8 +107,9 @@ git mv 旧文件 新文件 #重新命名文件
 git checkout -- <file> #用版本库的版本替换工作区的版本，无论是工作区的修改还是删除，都可以'一键还原'
                                   #丢弃工作区的修改（让文件回到最近一次的git commit或git add时的状态）
 git reset HEAD <file> #把暂存区的修改撤销掉，重新放回工作区。
-git reset - mixed #还没有提交的暂存区域还原这些更改。它仅从暂存区域恢复更改。
-git reset --hard 7d8162 #将HEAD指针重置为特定提交ID的最新提交，并删除本地文件更改。
+git reset - mixed #还没有提交的暂存区域还原这些更改。它仅从暂存区域恢复更改。（不删除工作空间改动代码，撤销commit，并且撤销git add .）
+git reset --hard 7d8162 #将HEAD指针重置为特定提交ID的最新提交，并删除本地文件更改。（删除工作空间改动代码，撤销commit，撤销git add . 。恢复到了上一次的commit状态。）
+git reset --soft HEAD^ #不删除工作空间改动代码，撤销commit，不撤销git add . 
 
 
 标签
