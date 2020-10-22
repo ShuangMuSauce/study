@@ -84,6 +84,8 @@ git remote show [remote-name] #查看远程仓库
 git checkout -b branch-name origin/branch-name #在本地创建和远程分支对应的分支
 git branch --set-upstream branch-name origin/branch-name #建立本地分支和远程分支的关联
 
+
+
 #远程仓库的重命名
 git remote rename [旧仓库名称] [新仓库的名称]
                 git remote rename gs newgs   
@@ -145,3 +147,21 @@ git merge --no-ff -m 'message' dev #禁用Fast forward合并dev分支
 	#Fast forward合并不可查看合并记录
 git branch -D <name> #强行删除某个未合并的分支
 	#开发新feature最好新建一个分支
+
+
+
+二. git fetch和gitpull的区别？
+           （一）远端跟踪分支不同
+	1、Git fetch：Git fetch能够bai直接更改du远端跟踪分支。
+	2、git pull：git pull无法直接对远程跟踪分支操作，我们必须先切回本地分支然后创建一个新的commit提交。
+           （二）拉取不同
+	1、Git fetch：Git fetch会将数据拉取到本地仓库 - 它并不会自动合并或修改当前的工作。
+	2、git pull：git pull是从远程获取最新版本并merge到本地，会自动合并或修改当前的工作。
+           （三）commitID不同
+	1、Git fetch：使用Git fetch更新代码，本地的库中master的commitID不变，还是等于1。
+	2、git pull：使用git pull更新代码，本地的库中master的commitID发生改变，变成了2
+小知识点
+       fetch：相当于是从远程获取最新版本到本地，不会自动merge
+       pull：相当于是从远程获取最新版本并merge到本地
+	即：git pull = git fetch + git merge
+       
