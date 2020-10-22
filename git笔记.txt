@@ -1,3 +1,26 @@
+git中一些选项解释:
+-d
+--delete：删除
+
+-D
+--delete --force的快捷键
+
+-f
+--force：强制
+
+-m
+--move：移动或重命名
+
+-M
+--move --force的快捷键
+
+-r
+--remote：远程
+
+-a
+--all：所有
+
+
 #设置用户名称与邮件地址
 git config --global user.name "maxsu"
 git config --global user.email maxsu@yiibai.com
@@ -57,6 +80,7 @@ git log --stat  #简略的统计信息
 git log --pretty=oneline  #--pretty,指定使用不同于默认格式的方式展示提交历史, 这个选项有一些内建的子选项供你使用,比如用 oneline 将每个提交放在一行显示.
 git log --pretty=format:"%h - %an, %ar : %s"  # 可以定制要显示的记录格式
 git log --pretty=format:"%h %s" --graph     #graph展示你的分支、合并历史
+git log -p FETCH_HEAD #branch在服务器上的最新状态
 
 #撤消操作
 git commit --amend
@@ -78,6 +102,8 @@ git fetch <shortname> From <url> #拉取仓库中有但你没有的信息
 git fetch [remote-name]  #从远程仓库中抓取与拉取
 git pull #抓取远程提交
 git pull origin dev（dev为远程分支名）#将远程分支拉取到本地
+git pull <远程主机名> <远程分支名>:<本地分支名> #将远程主机的某个分支的更新取回，并与本地指定的分支合并
+git fetch <远程主机名> <分支名>   #拉回特定分支的更新
 git push [remote-name] [branch-name]  #推送到远程仓库
               git push origin master
 git remote show [remote-name] #查看远程仓库
@@ -135,10 +161,13 @@ git apply #修改本地文件而不创建提交
 分支
 git checkout -b dev #创建并切换分支
 	#相当于git branch dev 和git checkout dev
+git branch #查看本地所有分支 
 git branch <branch name>   #创建一个新的分支
 git branch #查看当前分支，当前分支前有个*号
 git checkout <name> #切换分支
 git branch -d <name> #删除分支
+git branch -r #查看远程所有分支
+git branch -a #查看本地和远程的所有分支
 git branch -m 旧分支 新分支   #重命名
 git merge <name> #合并某个分支到当前分支
 git log --graph #查看分支合并图
@@ -147,6 +176,8 @@ git merge --no-ff -m 'message' dev #禁用Fast forward合并dev分支
 	#Fast forward合并不可查看合并记录
 git branch -D <name> #强行删除某个未合并的分支
 	#开发新feature最好新建一个分支
+git branch -d -r <branchname> #删除远程分支，删除后还需推送到服务器
+git push origin:<branchname>  #删除后推送至服务器
 
 
 
