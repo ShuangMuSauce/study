@@ -80,6 +80,11 @@ git log
 git log -p -2    #-p用来显示每次提交的内容差异,-2显示最近两次提交
 git log --stat  #简略的统计信息
 git log --pretty=oneline  #--pretty,指定使用不同于默认格式的方式展示提交历史, 这个选项有一些内建的子选项供你使用,比如用 oneline 将每个git reflog #查看历史命令
+git shortlog #返回仓库每个用户commit 的次数
+	-s 参数省略每次 commit 的注释，仅仅返回一个简单的统计。
+	-n 参数按照 commit 数量从多到少的顺利对用户进行排序。
+
+
 
 #提交放在一行显示.
 git log --pretty=format:"%h - %an, %ar : %s"  # 可以定制要显示的记录格式
@@ -193,7 +198,7 @@ git branch -D <name> #强行删除某个未合并的分支
 git branch -d -r <branchname> #删除远程分支，删除后还需推送到服务器
 git push origin:<branchname>  #删除后推送至服务器
 
-
+git describe #命令显示离当前提交最近的标签。
 
 
 
