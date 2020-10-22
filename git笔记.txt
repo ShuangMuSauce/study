@@ -198,6 +198,7 @@ git push origin:<branchname>  #删除后推送至服务器
 
 
 自定义git
+git config --list #检查配置
 git config --global color.ui true
 	编写.gitignore文件来忽略某些文件，此文件本身要放到版本库内，并可对其做版本管理
 .gitignore #忽略文件
