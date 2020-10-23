@@ -198,7 +198,12 @@ git branch -D <name> #强行删除某个未合并的分支
 git branch -d -r <branchname> #删除远程分支，删除后还需推送到服务器
 git push origin:<branchname>  #删除后推送至服务器
 
+git describe --tags
 git describe #命令显示离当前提交最近的标签。
+	     符合条件的tag指向最新提交则只是显示tag的名字，否则会有相关的后缀来描述该tag之后
+	     有多少次提交以及最新的提交commit id。
+
+
 
 
 
