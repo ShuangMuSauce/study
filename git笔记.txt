@@ -202,7 +202,12 @@ git describe --tags
 git describe #命令显示离当前提交最近的标签。
 	     符合条件的tag指向最新提交则只是显示tag的名字，否则会有相关的后缀来描述该tag之后
 	     有多少次提交以及最新的提交commit id。
-
+git rebase #可以把本地未push的分叉提交历史整理成直线。
+git rebase master #以master为基础，将feature分支上的修改增加到master分支上，并生成新的版本。
+git rebase —continue  #假如git rebase master出现冲突，冲突解决后，可以继续之前的rebase操作。
+git rebase --abort  #终止rebase的行动，分支会回到rebase开始前的状态。
+git rebase -i #将本地的多次提交合并为一个，简化提交历史。
+git rebase -i HEAD~2  #合并提交 ，2表示合并两个
 
 
 
