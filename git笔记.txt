@@ -221,6 +221,26 @@ git cherry-pick <start-commit-id>^..<end-commit-id>
 	后者有”^”标志的表示把到之间(闭区间，包含start-commit-id)的提交cherry-pick到当前分支
 
 
+ls  #用来显示目录或具体文件列表
+ls -a #列出所有文件，包括隐藏文件。
+ls -la #所有文件的长格式列表（含权限、所有权、大小和修改日期）。
+ls -lh #使用人可读单位（KB，MB，GB）显示大小的长格式列表。
+ls -lS #按大小排序的长格式列表（降序）。
+ls -ltr #按大小排序的长格式列表（降序）。
+
+cat #打印、合并文件。
+cat file #将文件内容打印显示。
+cat file1 file2> target_file #将多个文件合并到目标文件中。 
+cat file1 file2 >> target_file #将几个文件附加到目标文件中。
+
+mv #移动或重命名文件和目录。
+mv file1.txt file2.txt #将file1文本重命名为file2。
+mv file1.txt file2 #讲file1文本移动到file2目录。
+
+touch #用于修改文件或者目录的时间属性，包括存取时间和更改时间。若文件不存在，系统会建立一个新的空白文件。
+touch file #修改file的时间属性，如果file不存在，则将创建一个新的空白文件。
+
+
 
 自定义git
 git config --list #检查配置
