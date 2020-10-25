@@ -157,6 +157,7 @@ git reset --hard HEAD^ #将HEAD指针重置为特定提交ID的最新提交，�
   HEAD^^(上上版本),HEAD~100(往上100个版本)    commit id(版本号) 可回到指定版本
 git reset --soft HEAD^ #不删除工作空间改动代码，撤销commit，不撤销git add . 
 git rm <file> #删除文件，若文件已提交到版本库，不用担心误删，但是只能恢复文件到最新版本
+git revert HEAD #新提交一次，使代码恢复到之前一次的状态
 
 
 标签
@@ -210,6 +211,8 @@ git rebase -i #将本地的多次提交合并为一个，简化提交历史。
 git rebase -i HEAD~2  #合并提交 ，2表示合并两个
 
 git cherry-pik <提交号>... #如果你想将一些提交复制到当前所在的位置（HEAD）下面的话， Cherry-pick 是最直接的方式了。
+		           如果有冲突，你解决冲突后，使用git cherry-pick --continue完成cherry-pick操作。
+		           或者使用git cherry-pick --abort中断操作。
 git cherry-pick <commit id>:单独合并一个提交
 git cherry-pick -x <commit id>：同上，不同点：保留原提交者信息。
 git cherry-pick <start-commit-id>..<end-commit-id>
