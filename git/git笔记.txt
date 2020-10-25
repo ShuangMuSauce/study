@@ -1,0 +1,296 @@
+git中一些选项解释:
+-d
+--delete：删除
+
+-D
+--delete --force的快捷键
+
+-f
+--force：强制
+
+-m
+--move：移动或重命名
+
+-M
+--move --force的快捷键
+
+-r
+--remote：远程
+
+-a
+--all：所有
+
+工作区（Working Directory）
+版本库（Repository） #.git
+	stage(index) 暂存区
+	master Git自动创建的分支
+	HEAD 指针
+
+mkdir <textname>  #创建一个文件
+echo "创建一个文件">home.txt
+git rm <file> #删除文件
+git rm --cached <file> #从暂存区域移除,保留在当前工作目录中
+
+
+ssh-keygen -t rsa -C 'user@example.com' #创建SSH Key
+#设置用户名称与邮件地址
+git config --global user.name "maxsu"
+git config --global user.email maxsu@yiibai.com
+
+#使用不同的文本编辑器
+#Vim（编辑器）
+git config --global core.editor （编辑器名）
+git config --global core.editor   Vim
+
+#检查配置信息
+git config --list
+#检查 Git 的某一项配置
+git config user.name
+
+#获取帮助
+git help <verb>
+git <verb> --help
+man git-<verb>
+
+#获得 config 命令的手册
+git help config
+
+git init  #初始化仓库
+git add <hello.txt>  # 把所有要提交的文件修改放到暂存区
+git add .  #将所有文件暂存起来
+git commit -m 'add a file' # 把暂存区的所有内容提交到当前分支
+git commit -a -m 'add a file' #给 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件
+	暂存起来一并提交，从而跳过 git add 步骤
+git status   #检查当前文件状态
+git status -s 命令或 git status --short	#状态简览
+
+git diff #查看文件修改内容
+git diff --cached #查看已经暂存起来的变化
+git diff HEAD -- <file> #查看工作区和版本库里最新版本的区别
+
+#重命名文件
+git mv <oldFile> <newFile> 
+相当于：
+          mv README.md home.md
+          git rm README.md
+          git add home.txt
+
+#查看提交历史
+git log   
+git log -p -2    #-p用来显示每次提交的内容差异,-2显示最近两次提交
+git log --stat  #简略的统计信息
+git log --pretty=oneline  #--pretty,指定使用不同于默认格式的方式展示提交历史, 这个选项有一些内建的子选项供你使用,比如用 oneline 将每个git reflog #查看历史命令
+git shortlog #返回仓库每个用户commit 的次数
+	-s 参数省略每次 commit 的注释，仅仅返回一个简单的统计。
+	-n 参数按照 commit 数量从多到少的顺利对用户进行排序。
+
+
+
+#提交放在一行显示.
+git log --pretty=format:"%h - %an, %ar : %s"  # 可以定制要显示的记录格式
+git log --pretty=format:"%h %s" --graph     #graph展示你的分支、合并历史
+git log -p FETCH_HEAD #branch在服务器上的最新状态
+
+#撤消操作
+git commit --amend
+#提交后发现忘记了暂存某些需要的修改
+git commit -m 'initial commit'
+git add forgotten_file
+git commit --amend
+
+#取消暂存的文件
+#暂存两个文件，取消暂存两个中的一个。
+git reset HEAD <file>
+git checkout --<file>   #撤消对文件的修改
+
+git clone <url>  #克隆远程仓库
+it clone git@github.com:username/repostery.git #从远程库克隆一个到本地库
+	#git支持多种协议，包括https，原生git协议速度最快
+git remote   #查看远程仓库
+git remote -v #显示需要读写的远程仓库和对应的 URL
+git remote add <shortname> <url> #添加远程仓库
+git remote add origin git@github.com:username/repostery.git #关联本地仓库，远程库的名字为origin
+	#第一次使用Git的clone或者push命令连接GitHub时需确认
+git fetch <shortname> From <url> #拉取仓库中有但你没有的信息
+git fetch [remote-name]  #从远程仓库中抓取与拉取
+git pull #抓取远程提交
+git pull origin dev（dev为远程分支名）#将远程分支拉取到本地
+git pull <远程主机名> <远程分支名>:<本地分支名> #将远程主机的某个分支的更新取回，并与本地指定的分支合并
+git fetch <远程主机名> <分支名>   #拉回特定分支的更新
+git push [remote-name] [branch-name]  #推送到远程仓库
+              git push origin master
+git push -u origin master #第一次把当前分支master推送到远程，-u参数不但推送，而且将本地的分支和远程的分支关联起来
+git remote show [remote-name] #查看远程仓库
+git checkout -b branch-name origin/branch-name #在本地创建和远程分支对应的分支
+git branch --set-upstream branch-name origin/branch-name #建立本地分支和远程分支的关联
+
+
+
+#远程仓库的重命名
+git remote rename [旧仓库名称] [新仓库的名称]
+                git remote rename gs newgs   
+git remote rm newgs   #远程仓库的移除
+
+
+隐藏
+git stash #隐藏当前工作现场，等恢复后继续工作
+git stash list #查看stash记录
+git stash apply #仅恢复现场，不删除stash内容
+git stash drop #删除stash内容
+git stash pop #恢复现场的同时删除stash内容
+
+移动和重命名
+git mv 文件 目录   #将目录或文件从一个位置移动到另一个位置
+           git mv main.py src/
+git mv 旧文件 新文件 #重新命名文件
+            git mv dome.txt  module.txt
+
+修正错误
+git checkout -- <file> #用版本库的版本替换工作区的版本，无论是工作区的修改还是删除，都可以'一键还原'
+                                  #丢弃工作区的修改（让文件回到最近一次的git commit或git add时的状态）
+git reset HEAD <file> #把暂存区的修改撤销掉，重新放回工作区。
+git reset - mixed #还没有提交的暂存区域还原这些更改。它仅从暂存区域恢复更改。
+（不删除工作空间改动代码，撤销commit，并且撤销git add .）
+
+git reset --hard HEAD^ #将HEAD指针重置为特定提交ID的最新提交，并删除本地文件更改。
+（删除工作空间改动代码，撤销commit，撤销git add . 。恢复到了上一次的commit状态。）
+  HEAD^^(上上版本),HEAD~100(往上100个版本)    commit id(版本号) 可回到指定版本
+git reset --soft HEAD^ #不删除工作空间改动代码，撤销commit，不撤销git add . 
+git rm <file> #删除文件，若文件已提交到版本库，不用担心误删，但是只能恢复文件到最新版本
+git revert HEAD #新提交一次，使代码恢复到之前一次的状态
+
+
+标签
+git tag v1.0 #给当前分支最新的commit打标签
+git tag v0.9 36df530 #给历史提交的commit打标签
+git tag -a v0.1 -m 'version 0.1 released' 3628164 #-a指定标签名，-m指定说明文字
+git tag -s <tagname> -m 'blabla' #可以用PGP签名标签
+git tag #查看所有标签
+git show v1.0 #查看标签信息
+git tag -d v0.1 #删除标签
+git push origin <tagname> #推送某个标签到远程
+git push origin --tags #推送所有尚未推送的本地标签
+删除远程标签  git tag -d v0.2 #先删除本地标签
+			 git push origin :refs/tags/v0.2 #删除远程标签
+
+补丁
+git format-patch   #创建最新提交的修补程序。如果要为特定提交创建修补程序，请在format-patch命令后面指定 COMMIT_ID。
+git am     #会修改文件并创建提交
+git apply #修改本地文件而不创建提交
+
+分支
+git checkout -b dev #创建并切换分支
+	#相当于git branch dev 和git checkout dev
+git branch #查看本地所有分支 
+git branch <branch name>   #创建一个新的分支
+git branch #查看当前分支，当前分支前有个*号
+git checkout <name> #切换分支
+git branch -d <name> #删除分支
+git branch -r #查看远程所有分支
+git branch -a #查看本地和远程的所有分支
+git branch -m 旧分支 新分支   #重命名
+git merge <name> #合并某个分支到当前分支
+git log --graph #查看分支合并图
+git merge --no-ff -m 'message' dev #禁用Fast forward合并dev分支
+	#本次合并要创建新的commit，所以要加上-m参数，把commit描述写进去
+	#Fast forward合并不可查看合并记录
+git branch -D <name> #强行删除某个未合并的分支
+	#开发新feature最好新建一个分支
+git branch -d -r <branchname> #删除远程分支，删除后还需推送到服务器
+git push origin:<branchname>  #删除后推送至服务器
+
+git describe --tags
+git describe #命令显示离当前提交最近的标签。
+	     符合条件的tag指向最新提交则只是显示tag的名字，否则会有相关的后缀来描述该tag之后
+	     有多少次提交以及最新的提交commit id。
+git rebase #可以把本地未push的分叉提交历史整理成直线。
+git rebase master #以master为基础，将feature分支上的修改增加到master分支上，并生成新的版本。
+git rebase —continue  #假如git rebase master出现冲突，冲突解决后，可以继续之前的rebase操作。
+git rebase --abort  #终止rebase的行动，分支会回到rebase开始前的状态。
+git rebase -i #将本地的多次提交合并为一个，简化提交历史。
+git rebase -i HEAD~2  #合并提交 ，2表示合并两个
+
+git cherry-pik <提交号>... #如果你想将一些提交复制到当前所在的位置（HEAD）下面的话， Cherry-pick 是最直接的方式了。
+		           如果有冲突，你解决冲突后，使用git cherry-pick --continue完成cherry-pick操作。
+		           或者使用git cherry-pick --abort中断操作。
+git cherry-pick <commit id>:单独合并一个提交
+git cherry-pick -x <commit id>：同上，不同点：保留原提交者信息。
+git cherry-pick <start-commit-id>..<end-commit-id>
+git cherry-pick <start-commit-id>^..<end-commit-id>
+	前者表示把到之间(左开右闭，不包含start-commit-id)的提交cherry-pick到当前分支； 
+	后者有”^”标志的表示把到之间(闭区间，包含start-commit-id)的提交cherry-pick到当前分支
+
+
+ls  #用来显示目录或具体文件列表
+ls -a #列出所有文件，包括隐藏文件。
+ls -la #所有文件的长格式列表（含权限、所有权、大小和修改日期）。
+ls -lh #使用人可读单位（KB，MB，GB）显示大小的长格式列表。
+ls -lS #按大小排序的长格式列表（降序）。
+ls -ltr #按大小排序的长格式列表（降序）。
+
+cat #打印、合并文件。
+cat file #将文件内容打印显示。
+cat file1 file2> target_file #将多个文件合并到目标文件中。 
+cat file1 file2 >> target_file #将几个文件附加到目标文件中。
+
+mv #移动或重命名文件和目录。
+mv file1.txt file2.txt #将file1文本重命名为file2。
+mv file1.txt file2 #讲file1文本移动到file2目录。
+
+touch #用于修改文件或者目录的时间属性，包括存取时间和更改时间。若文件不存在，系统会建立一个新的空白文件。
+touch file #修改file的时间属性，如果file不存在，则将创建一个新的空白文件。
+
+
+
+自定义git
+git config --list #检查配置
+git config --global color.ui true
+	编写.gitignore文件来忽略某些文件，此文件本身要放到版本库内，并可对其做版本管理
+.gitignore #忽略文件
+	#GitHub 有一个十分详细的针对数十种项目及编程语言的 .gitignore 文件列表
+https://github.com/github/gitignore
+git add -f hello.pyc #-f参数强制添加到Git
+git check-ignore -v hello.pyc　＃检查.gitignore文件的规则
+简写命令
+git config --global alias.co checkout #简写checkout命令
+git config --global alias.st status
+git config --global alias.ci commit
+git config --global alias.br branch
+git config --global alias.unstage 'reset HEAD' #撤销暂存区的修改
+git config --global alias.last 'log -1' #查看最近一次的提交
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+配置文件
+--global参数时针对当前用户起作用，如果不加，仅针对当前仓库起作用
+每个仓库的Git配置文件在 .git/config 文件中
+当前用户的Git配置文件在用户主目录下的 .gitconfig 文件中
+
+搭建Git服务器
+1、安装git sudo apt install git
+2、创建git用户 sudo adduser git
+3、创建证书登录，将所有需要登录的用户的公钥导入到/home/git/.ssh/authorized_keys文件，每行一个
+4、初始化Git仓库
+	在仓库目录下输入命令 sudo git init --bare sample.git 创建裸仓库（没有工作区）
+	把owner改为git sudo chown -R git:git sample.git
+5、禁用shell登录，修改/etc/passwd文件
+	git:x:1001:1001:,,,:/home/git:/bin/bash
+	改为：
+	git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
+
+6、克隆远程仓库
+git clone git@server:/srv/sample.git
+
+二. git fetch和gitpull的区别？
+           （一）远端跟踪分支不同
+	1、Git fetch：Git fetch能够bai直接更改du远端跟踪分支。
+	2、git pull：git pull无法直接对远程跟踪分支操作，我们必须先切回本地分支然后创建一个新的commit提交。
+           （二）拉取不同
+	1、Git fetch：Git fetch会将数据拉取到本地仓库 - 它并不会自动合并或修改当前的工作。
+	2、git pull：git pull是从远程获取最新版本并merge到本地，会自动合并或修改当前的工作。
+           （三）commitID不同
+	1、Git fetch：使用Git fetch更新代码，本地的库中master的commitID不变，还是等于1。
+	2、git pull：使用git pull更新代码，本地的库中master的commitID发生改变，变成了2
+小知识点
+       fetch：相当于是从远程获取最新版本到本地，不会自动merge
+       pull：相当于是从远程获取最新版本并merge到本地
+	即：git pull = git fetch + git merge
+       
