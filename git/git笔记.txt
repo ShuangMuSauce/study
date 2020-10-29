@@ -20,6 +20,9 @@ git中一些选项解释:
 -a
 --all：所有
 
+--allow-unrelated-histories    (忽略版本不同造成的影响)
+ssh -T git@github.com  #验证与github连接是否成功时
+
 工作区（Working Directory）
 版本库（Repository） #.git
 	stage(index) 暂存区
@@ -189,6 +192,7 @@ git branch -d <name> #删除分支
 git branch -r #查看远程所有分支
 git branch -a #查看本地和远程的所有分支
 git branch -m 旧分支 新分支   #重命名
+git branch -u origin/master master  #建立本地分支和远程分支的追踪关系
 git merge <name> #合并某个分支到当前分支
 git log --graph #查看分支合并图
 git merge --no-ff -m 'message' dev #禁用Fast forward合并dev分支
