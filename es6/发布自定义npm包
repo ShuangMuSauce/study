@@ -1,6 +1,0 @@
-发布自定义npm包
-    1.npm publish  //报错，没有登陆
-
-    2.npm login
-
-    3.www.npmjs.com  //npm官网
