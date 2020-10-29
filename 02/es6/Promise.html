@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    Promise
+     异步：1.操作之间没啥关系，同时进行多个操作
+           2.代码更复杂
+     同步：1.同时只能做一件事。
+           2.代码简单
+
+     promise  -- 消除异步操作
+        *用同步一样的方式，来书写异步代码。
+
+        Promise之后的异步 ：
+        Promise.all([$.ajax(),$.ajax()]).then(results=>{
+            //成功了
+        },err=>{
+            //失败了
+        })
+
+        Promise.race  竞速
+
+    <script type="text/javascript">
+        let p=new Promise(function(resolve,reject){
+            //resolve--成功
+            //reject---失败
+            $.ajax({
+                url:'arr.txt',
+                dataType:'json',
+                success(arr){
+                    resolve(arr);
+                },
+                error(err){
+                    reject(err);
+                }
+            })
+        });
+        p.then(function(arr){
+            alert('成功'+arr) //相当于resolve
+        },function(err){
+            alert('失败了'+err)
+        });
+
+
+
+        let p2=new Promise(function(resolve,reject){
+            //resolve--成功
+            //reject---失败
+            $.ajax({
+                url:'json.txt',
+                dataType:'json',
+                success(arr){
+                    resolve(arr);
+                },
+                error(err){
+                    reject(err);
+                }
+            })
+        });
+       Promise.all([
+           p,p2
+       ]).then(function(){
+           let [res1,res2]=arr;
+           alert('全都成功了')
+           alert(res1);
+           alert(res2)
+       },function(){
+        alert('至少有一个成功')
+       });
+
+        //简化
+        function createPromise(url) {
+            return new Promise(function(resolve,reject){
+                $.ajax({
+                    url,
+                    dataType:'json',
+                    success(arr) {
+                        resolve(arr);
+                    },
+                    error(err){
+                        reject(err);
+                    }
+                })
+            })
+        }
+
+        Promise.all([
+            createPromise('arr.txt'),
+            createPromise('json.txt')
+        ]).then(function(){
+            let [res1,res2]=arr;
+            alert('全都成功了')
+            alert(res1);
+            alert(res2)
+        },function(){
+            alert('至少有一个成功')
+        });
+
+
+
+
+        Promise.all({
+            $.ajax({url:'arr.txt',dataType:'json'}),
+            $.ajax({url:'json.txt',dataType:'json'})
+        }).then(function(results){
+            let [arr,json]=results
+            alert("成功了");
+            alert(arr);
+            alert(result);
+        },function(){
+            alert('失败了')
+        })
+
+
+        Promise.all([
+            $.ajax({url:'arr.txt',dataType:'json'}),
+            $.ajax({url:'json.txt',dataType:'json'}),
+            $.ajax({url:'num.txt',dataType:'json'}),
+        ]).then(results=>{
+            let [arr,json,num]=results
+            alert("成功了")
+            console.log(arr,json,num)
+        },err=>{
+            alert("失败了");
+        })
+    </script>
+</body>
+</html>
