@@ -8,13 +8,20 @@ const app=new Koa()
 
 
 //注册   next下一个中间件函数
-app.use((ctx,next)=>{
+app.use(async (ctx,next)=>{
     //ctx 上下文   next下一个中间件函数
-    console.log('我是第一个中间件')
-    next()
+    console.log(1)
+    await next()
+    console.log(2)
 })
 
-app.use((ctx,next)=>{
-    console.log('我是上一个中间件的next方法调用的中间件')
+app.use(async (ctx,next)=>{
+    console.log(3)
+    await next()
+    console.log(4)
 })
+
+//不加async，await依次输出，1，3，4，2，加上async，await可以保证万无一失
+
+
 app.listen(3000)
