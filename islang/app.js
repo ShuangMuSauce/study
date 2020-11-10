@@ -1,17 +1,21 @@
 const Koa=require('koa')
+const Router=require('koa-router')
+
 const app=new Koa()
+const router =new Router()
 
-app.use(async (ctx,next)=>{
-    await next()
-    const r=ctx.r //获得第二个中间件的res
-    console.log(r)
+router.get('/classic/latest',(ctx,next)=>{
+    ctx.body={key:'calssic'}
 })
 
-app.use(async (ctx,next)=>{
-    const axios=require('axios')
-    const res=await axios.get('http://baidu.com')
-    ctx.r=res
-    await next()
-})
+app.use(router.routes())
+//在Koa框架里面ctx等效Request
+// app.use(async (ctx,next)=>{
+//     console.log(ctx.path)
+//     console.log(ctx.method)
+//     if (ctx.path==="/classic/latest" && ctx.method === "GET") {
+//         ctx.body={key:'classic'}
+//     }
+// })
 
 app.listen(3000)
