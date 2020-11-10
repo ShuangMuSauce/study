@@ -4,18 +4,25 @@ const Router=require('koa-router')
 const app=new Koa()
 const router =new Router()
 
-router.get('/classic/latest',(ctx,next)=>{
-    ctx.body={key:'calssic'}
+router.get('v1/classic/latest?version=v1',(ctx,next)=>{
+    ctx.body={key:'music'}
 })
 
+if(v1){
+
+}
+
+if(v2){
+
+}
+
+//客户端兼容性 老版本classic 新版本 music
+//v1 v2 v3 支持3个版本
+//api 携带版本号
+//1 路径
+//2 查询参数
+//3 header
+//api 版本 业务变动
 app.use(router.routes())
-//在Koa框架里面ctx等效Request
-// app.use(async (ctx,next)=>{
-//     console.log(ctx.path)
-//     console.log(ctx.method)
-//     if (ctx.path==="/classic/latest" && ctx.method === "GET") {
-//         ctx.body={key:'classic'}
-//     }
-// })
 
 app.listen(3000)
