@@ -9,6 +9,8 @@ router.get('/v1/:id/classic/latest',(ctx,next)=>{
     ctx.body={
         key: 'classic'
     }
+
+    throw new Error('Api Exception')
 })
 
 module.exports=router
