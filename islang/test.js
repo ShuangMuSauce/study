@@ -8,23 +8,33 @@ function func1() {
     }
 }
 
-function func2() {
+async function func2() {
     try {
-        func3()
+       await func3()
     } catch (error) {
-        throw error
+       console.log('error')
     }
 }
 
-function func3() {
-    try {
-        1/0
-    } catch (error) {
-        throw error
-    }
-    return 'success'
+//Promise async await 
+
+//全局异常处理 异常 promise Async  回调
+async function func3() {
+    return new Promise((resolve,reject)=>{
+        setTimeout(function() {
+            const r=Math.random()
+            if(r<0.5) {
+                reject ('error')
+            }
+        })
+    })
+
+//   await setTimeout(function () {
+//       throw new Error ('error')
+//   },1000)
 }
 
+func1()
 //没有发生异常  正确返回结果
 // 发生了异常
 
