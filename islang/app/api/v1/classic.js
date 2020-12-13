@@ -6,11 +6,18 @@ router.get('/v1/:id/classic/latest',(ctx,next)=>{
     const query=ctx.request.query
     const headers=ctx.request.header
     const body=ctx.request.body
+
+    if(true) {
+        //动态
+        const error = new Error('为什么错误')
+        error.errorCode=10001
+        error.status=400
+        error.requestUrl=`${ctx.method} ${ctx.path}`
+        throw error
+    }
     ctx.body={
         key: 'classic'
     }
-
-    throw new Error('Api Exception')
 })
 
 module.exports=router
