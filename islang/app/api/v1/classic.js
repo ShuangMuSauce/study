@@ -8,6 +8,18 @@ router.get('/v1/:id/classic/latest',(ctx,next)=>{
     const headers=ctx.request.header
     const body=ctx.request.body
     const v=new PositiveIntegerValidator().validate(ctx)
+
+    const c = {
+        a:1,
+        b:{
+            f:2,
+            e:{
+                
+            }
+        }
+    }
+
+    const id=v.get('body.b.e',parsed=false)
     ctx.body='classic'
 })
 
