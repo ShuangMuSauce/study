@@ -14,10 +14,21 @@ const sequelize = new Sequelize(dbName,user,password,{
     logging:true,
     timezone:'+08:00',
     define:{
-
+        //create_time update_time delete_time
+        timestamps:true,
+        paranoid:true,
+        createdAt:'created_at',
+        updatedAt:'updated_at',
+        deletedAt:'deleted_at',
+        underscored:true
     }
 })
 
+
+sequelize.sync({
+    force:true
+})
+
 module.exports={
-    db:sequelize
+    sequelize
 }
