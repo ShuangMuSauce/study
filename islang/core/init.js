@@ -14,7 +14,7 @@ class InitManager {
         global.config = config
     }
     static initLoadRouters(){
-        const apiDirectory=`${process.cwd()}/app/api`
+        const apiDirectory = `${process.cwd()}/app/api`
         requireDirectory(module,apiDirectory,{
             visit: whenLoadModule
         })
