@@ -6,12 +6,14 @@ const router = new Router({
     prefix: '/v1/user',
 })
 
-//注册 新增数据 put get delete
 router.post('/register',async (ctx)=>{
-    //思维路径
-    //接受参数 LinValidator
-    //email password1 password2 nickname
-    console.log(ctx);
+
+    //router.post('/register', new RegisterValidator,async(ctx))
+    //-> 全局的中间件只执行一次，每一次执行都会改变上一次的值，要避免这样写
+
+    //router.post('/register', function,async(ctx))
+    //校验器不适合用函数组织，适合用类。
+
     const v = await new RegisterValidator().validate(ctx)
     const user = {
         email: v.get('body.email'),
