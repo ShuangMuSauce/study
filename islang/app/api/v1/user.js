@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const Router=require('koa-router')
 
 const { RegisterValidator } = require('../../validators/validator')
@@ -7,23 +8,17 @@ const router = new Router({
 })
 
 router.post('/register',async (ctx)=>{
-
-    //router.post('/register', new RegisterValidator,async(ctx))
-    //-> 全局的中间件只执行一次，每一次执行都会改变上一次的值，要避免这样写
-
-    //router.post('/register', function,async(ctx))
-    //校验器不适合用函数组织，适合用类。
-
     const v = await new RegisterValidator().validate(ctx)
+    const salt = bcrypt.genSaltSync(10)
+    //位数，成本
+    //明文，加密 不同， 彩虹攻击
+    const psw = bcrypt.hashSync(v.get('body.password2'),salt)
     const user = {
         email: v.get('body.email'),
-        password: v.get('body.password2'),
+        password: psw,
         nickname: v.get('body.nickname')
     }
         const r = await User.create(user)
-   
-
-
 })
 
 module.exports = router
