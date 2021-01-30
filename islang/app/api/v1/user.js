@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const Router=require('koa-router')
+const {success} = require('../../lib/helper')
 
 const { RegisterValidator } = require('../../validators/validator')
 const { User } = require('../../models/user')
@@ -15,6 +16,7 @@ router.post('/register',async (ctx)=>{
         nickname: v.get('body.nickname')
     }
         const r = await User.create(user)
+        success()
 })
 
 module.exports = router
