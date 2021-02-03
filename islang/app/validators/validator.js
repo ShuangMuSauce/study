@@ -51,7 +51,36 @@ class RegisterValidator extends LinValidator {
     }
   }
 
+}
+
+class TokenValidator extends LinValidator {
+  constructor() {
+    this.account = [
+      new Rule('isLength','不符合账号规则',{
+        min: 4,
+        max: 32
+      })
+    ]
+
+    this.secret = [
+      // 1.可以为空 可以不传
+      // 2.可以为空 可以不为空
+      //是必须要传入的吗？
+      //web 账号+密码
+      //登录 多元化 小程序 密码
+      //微信 打开小程序 合法用户
+      //web account + secret
+      //account
+      //手机登陆
+      new Rule('isOptional'),
+      new Rule('isLength','至少6个字符',{
+        min: 6,
+        max: 128
+      })
+    ]
   }
+}
+
 module.exports={
     PositiveIntegerValidator,
     RegisterValidator
