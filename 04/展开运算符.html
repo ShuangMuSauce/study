@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+    // //数组
+    //     let arr=[1,2,3,4];
+    //     let arr2=["a","b",...arr,"c","d"];
+    //     console.log(arr2)
+
+    //     //剩余参数
+    //     let [a,b,...c]=arr;
+    //     console.log(a,b,c);
+    
+    //对象
+    // let obj = {
+    //     a:1,
+    //     b:2
+    // };
+    
+    // let obj2 = {
+    //     ...obj,
+    //     c:3,
+    //     d:4
+    // };
+    // console.log(obj2);
+
+    // let {a,b,...c} = obj2;
+    // console.log(a,b,c);
+
+
+
+    // let obj = {
+    //     a:1,
+    //     b:2
+    // };
+    
+    // let obj2={...obj}; //解构不存在传值。
+    // obj2.a=10;
+
+    // console.log(obj);  //1,2
+
+
+    let obj = {
+        a:1,
+        b:2
+    };
+    
+    let obj2=obj;
+    obj2.a=10;
+
+    console.log(obj);  //10,2
+    </script>
+</body>
+</html>
