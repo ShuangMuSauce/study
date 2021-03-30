@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构赋值</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+    //对象
+        let obj={
+            a:1,
+            b:2,
+            c:5,
+            b:0
+        };
+        // let a=obj.a;
+        // let b=obj.b;
+        // console.log(a,b)
+
+        let {a,b,c}=obj;
+        console.log(a,b,c);
+    
+    //数组
+    let arr = ["a","b","c"];
+    let [e,f]=arr;
+    console.log(e,f);
+
+    let m=1;
+    let u=2;
+    //m和u交换值
+    [a,b]=[b,a];
+
+   
+    let str="abc";
+    let [v,p] = str;
+    console.log(v,p);
+
+    let nub1 = 123;
+    let [l,g] = nub1;
+    console.log(l,g); //nub1报错，不是一个迭代器。
+    </script>
+</body>
+</html>
