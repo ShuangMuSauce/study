@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let-const</title>
+</head>
+<body>
+<script>
+    // let a=1;
+    // console.log(a);
+    //
+    // var a=1;
+    // var a=10;
+    /*
+        var :
+            1.var 可以重复声明
+            2.作用域：全局作用域 和 函数作用域
+        let:
+            1.let 统一作用域不可以重复声明
+            2.作用域：全局作用域和块级作用域
+    */
+
+    if(true){
+        var a=1;
+    }
+    console.log(a)
+
+    {
+        let b=2;
+    }
+     console.log(b)
+    //块级作用域
+
+
+    //var会预解析，let不进行预解析
+    console.log(a)
+    var a=1;
+    
+    console.log(c)
+    let c=4; //报错
+
+    //const常量，不可修改，不可以重复声明，不进行预解析
+    const f=6;
+    f=9;
+    console.log(f);//6
+</script>
+</body>
+</html>
